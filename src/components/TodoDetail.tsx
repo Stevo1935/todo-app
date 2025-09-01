@@ -1,13 +1,22 @@
+import React from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { useTodo } from "../hooks/useTodos";
 import LoadingSpinner from "./LoadingSpinner";
 import "../styles/TodoDetail.css";
 import { FaArrowLeft } from "react-icons/fa";
 
-function TodoDetail() {
-  const { id } = useParams();
+interface Todo {
+  id: number;
+  title: string;
+  completed: boolean;
+  userId: number;
+}
+
+const TodoDetail: React.FC = () => {
+  const { id } = useParams<{ id: string }>();
+
   const navigate = useNavigate();
-  const { data: todo, isLoading, error } = useTodo(id);
+  const { data: todo, isLoading, error } = useTodo(id!);
 
   if (isLoading) return <LoadingSpinner />;
   if (error) return <div role="alert">Error loading todo</div>;
@@ -28,6 +37,6 @@ function TodoDetail() {
       <p>ID: {todo.id}</p>
     </section>
   );
-}
+};
 
 export default TodoDetail;

@@ -1,3 +1,4 @@
+import React from "react";
 import { useState } from "react";
 import { useTodos, useCreateTodo, useDeleteTodo } from "../hooks/useTodos";
 import TodoItem from "./TodoItem";
@@ -7,26 +8,33 @@ import TodoForm from "./TodoForm";
 import LoadingSpinner from "./LoadingSpinner";
 import { FaPlus } from "react-icons/fa";
 import "../styles/TodoList.css";
+import { Todo } from "../types";
 
-function TodoList() {
-  const [page, setPage] = useState(1);
-  const [search, setSearch] = useState("");
-  const [status, setStatus] = useState("all");
-  const [showForm, setShowForm] = useState(false);
+interface TodoFormValues {
+  title: string;
+}
+
+const TodoList: React.FC = () => {
+  const [page, setPage] = useState<number>(1);
+  const [search, setSearch] = useState<string>("");
+  const [status, setStatus] = useState<"all" | "complete" | "incomplete">(
+    "all"
+  );
+  const [showForm, setShowForm] = useState<boolean>(false);
 
   const { data, isLoading, error } = useTodos(page, search, status);
-  const todos = data?.todos || [];
-  const total = data?.total || 0;
+  const todos: Todo[] = data?.todos || [];
+  const total: number = data?.total || 0;
 
   const createTodo = useCreateTodo();
   const deleteTodo = useDeleteTodo();
 
-  const handleCreate = (values) => {
-    createTodo.mutate({ ...values, completedsurface: false, userId: 1 });
+  const handleCreate = (values: TodoFormValues) => {
+    createTodo.mutate({ ...values, completed: false, userId: 1 });
     setShowForm(false);
   };
 
-  const handleDelete = (id) => {
+  const handleDelete = (id: number) => {
     if (window.confirm("Are you sure you want to delete this todo?")) {
       deleteTodo.mutate(id);
     }
@@ -66,6 +74,6 @@ function TodoList() {
       />
     </section>
   );
-}
+};
 
 export default TodoList;

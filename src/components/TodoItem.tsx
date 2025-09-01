@@ -1,18 +1,37 @@
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { useUpdateTodo } from "../hooks/useTodos";
 import { FaTrash, FaEdit } from "react-icons/fa";
-import { useState } from "react";
+import { Todo, TodoFormValues } from "../types";
 import TodoForm from "./TodoForm";
 
-function TodoItem({ todo, onDelete }) {
-  const [isEditing, setIsEditing] = useState(false);
-  const updateTodo = useUpdateTodo();
+interface TodoItemProps {
+  todo: Todo;
+  onDelete: (id: number) => void;
+}
 
-  const handleUpdate = (values) => {
-    updateTodo.mutate({ ...todo, ...values });
+const TodoItem: React.FC<TodoItemProps> = ({ todo }) => {
+  const [isEditing, setIsEditing] = useState<boolean>(false);
+  const { mutate: updateTodo } = useUpdateTodo();
+
+  const handleUpdate = (values: TodoFormValues) => {
+    updateTodo({
+      ...todo,
+      title: values.title,
+      completed: values.completed ?? false,
+    });
     setIsEditing(false);
   };
+  const handleToggle = () => {
+    updateTodo({
+      ...todo,
+      completed: !todo.completed,
+    });
+  };
+  const handleDelete = () => {
 
+  };
+ 
   return (
     <li className="todo-item" role="listitem">
       {isEditing ? (
@@ -39,7 +58,7 @@ function TodoItem({ todo, onDelete }) {
               <FaEdit />
             </button>
             <button
-              onClick={() => onDelete(todo.id)}
+              onClick={() => handleDelete}
               aria-label={`Delete ${todo.title}`}
             >
               <FaTrash />
@@ -49,6 +68,6 @@ function TodoItem({ todo, onDelete }) {
       )}
     </li>
   );
-}
+};
 
 export default TodoItem;

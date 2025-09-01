@@ -1,4 +1,11 @@
-function Pagination({ page, setPage, hasMore }) {
+import React from "react";
+interface PaginationProps {
+  page: number;
+  setPage: (page: number) => void;
+  hasMore: boolean;
+  total: number;
+}
+function Pagination({ page, setPage, hasMore }: PaginationProps) {
   return (
     <nav className="pagination" aria-label="Pagination">
       <button

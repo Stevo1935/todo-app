@@ -1,17 +1,32 @@
-import { useState, useCallback } from "react";
-function SearchFilter({ search, setSearch, status, setStatus }) {
-  const [localSearch, setLocalSearch] = useState(search);
+import React from "react";
+import { useState, useCallback, ChangeEvent } from "react";
+interface SearchFilterProps {
+  search: string;
+  setSearch: (search: string) => void;
+  status: "all" | "complete" | "incomplete";
+  setStatus: (status: "all" | "complete" | "incomplete") => void;
+}
+const SearchFilter: React.FC<SearchFilterProps> = ({
+  search,
+  setSearch,
+  status,
+  setStatus,
+}) => {
+  const [localSearch, setLocalSearch] = useState<string>(search);
 
-  const debounce = (func, delay) => {
-    let timeoutId;
-    return (...args) => {
+  const debounce = <T extends (...args: any[]) => void>(
+    func: T,
+    delay: number
+  ): ((...args: Parameters<T>) => void) => {
+    let timeoutId: number | undefined;
+    return (...args: Parameters<T>) => {
       clearTimeout(timeoutId);
       timeoutId = setTimeout(() => func(...args), delay);
     };
   };
 
   const handleSearchChange = useCallback(
-    debounce((value) => {
+    debounce((value: string) => {
       setSearch(value);
     }, 500),
     [setSearch]
@@ -25,7 +40,7 @@ function SearchFilter({ search, setSearch, status, setStatus }) {
           id="search"
           type="text"
           value={localSearch}
-          onChange={(e) => {
+          onChange={(e: ChangeEvent<HTMLInputElement>) => {
             setLocalSearch(e.target.value);
             handleSearchChange(e.target.value);
           }}
@@ -38,7 +53,9 @@ function SearchFilter({ search, setSearch, status, setStatus }) {
         <select
           id="status"
           value={status}
-          onChange={(e) => setStatus(e.target.value)}
+          onChange={(e: ChangeEvent<HTMLSelectElement>) =>
+            setStatus(e.target.value as "all" | "complete" | "incomplete")
+          }
           aria-label="Filter by completion status"
         >
           <option value="all">All</option>
@@ -48,6 +65,6 @@ function SearchFilter({ search, setSearch, status, setStatus }) {
       </div>
     </section>
   );
-}
+};
 
 export default SearchFilter;

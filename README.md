@@ -1,5 +1,31 @@
 # React + Vite
 
+## Getting Started
+
+
+
+### Installation
+
+1. Clone the repository:
+   ```
+   git clone <repository-url>
+   cd todo-app-ts
+   ```
+
+2. Install the dependencies:
+   ```
+   npm install
+   ```
+
+### Running the Application
+
+To start the development server, run:
+```
+npm run dev
+```
+
+The application will be available at `http://localhost:3000`.
+
 # Todo Application
 
 ## Project Description and Features
@@ -15,11 +41,15 @@ The Todo Application is a modern, responsive web app built with React 19+ to man
 - **Responsive Design**: Optimized for desktop and mobile views.
 - **Custom Styling**: BEM CSS methodology with a customizable color scheme (blue-gray).
 
-## Installation and Setup Instructions
+
 
 ### Prerequisites
 - Node.js (v18+ recommended)
 - npm (v8+)
 - Git (optional, for cloning)
+
+### Contributing
+
+Contributions are welcome! Please open an issue or submit a pull request for any enhancements or bug fixes.
 
 
