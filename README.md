@@ -1,0 +1,56 @@
+# React + Nextjs
+
+## Getting Started
+
+
+
+### Installation
+
+1. Clone the repository:
+   ```
+   git clone <repository-url>
+   cd todo-app-ts
+   ```
+
+2. Install the dependencies:
+   ```
+   npm install
+   ```
+
+### Running the Application
+
+To start the development server, run:
+```
+npm run dev
+```
+
+The application will be available at `http://localhost:3000`.
+
+# Todo Application
+
+## Project Description and Features
+
+The Todo Application is a modern, responsive web app built with React 19+ plus nextjs to manage tasks efficiently. It leverages the JSONPlaceholder API for todo data and includes advanced features for task management. The app is designed with a professional aesthetic using a blue-gray palette (`hsl(227, 35%, 25%)` shades) and a distinctive darker shades background for the "Add Todo" page and the header.
+
+### Key Features
+- **CRUD Operations**: Create, read, update, and delete todos with confirmation prompts.
+- **Filtering**: Search todos by title and filter by completion status (all, completed, pending), displaying up to ~100 todos per category.
+- **Pagination**: Navigate through todo lists with a "Next" button, supporting client-side pagination.
+- **Offline Support**: Cache todo data for offline CRUD and filtering using Tanstack Query.
+- **Accessibility**: Screen reader and keyboard navigation support for all components.
+- **Responsive Design**: Optimized for desktop and mobile views.
+- **Custom Styling**: BEM CSS methodology with a customizable color scheme (blue-gray).
+
+
+
+
+### Prerequisites
+- Node.js (v18+ recommended)
+- npm (v8+)
+- Git (optional, for cloning)
+
+### Contributing
+
+Contributions are welcome! Please open an issue or submit a pull request for any enhancements or bug fixes.
+
+
