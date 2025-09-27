@@ -1,0 +1,27 @@
+{
+  "compilerOptions": {
+    "target": "ESNext",
+    "module": "ESNext",
+    "moduleResolution": "Bundler",
+    "strict": true,
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "allowJs": true,
+    "useDefineForClassFields": true,
+    "baseUrl": "src",
+    "jsx": "preserve",
+    "jsxImportSource": "vue",
+    "types": [
+      "vite/client",
+      "vue-router",
+      
+      "axios",
+      "dexie",
+      "localforage"
+    ],
+    "forceConsistentCasingInFileNames": true
+  },
+  "include": ["src/**/*.ts", "src/**/*.d.ts", "src/**/*.vue"],
+  "exclude": ["node_modules"],
+  "references": [{ "path": "./tsconfig.node.json" }]
+}
