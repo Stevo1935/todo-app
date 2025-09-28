@@ -1,4 +1,4 @@
-import React from "react";
+
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import axios from "axios";
 import {
@@ -83,7 +83,7 @@ export const useTodos = (
 };
 
 export const useTodo = (
-  id: string
+  id: number
 ): ReturnType<typeof useQuery<Todo, Error>> => {
   return useQuery<Todo, Error>({
     queryKey: ["todo", id],

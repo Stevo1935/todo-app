@@ -1,12 +1,14 @@
 "use client";
-import React from "react";
-import { useState, useCallback, ChangeEvent } from "react";
+
+import React, { useState, useCallback, ChangeEvent } from "react";
+
 interface SearchFilterProps {
   search: string;
   setSearch: (search: string) => void;
   status: "all" | "complete" | "incomplete";
   setStatus: (status: "all" | "complete" | "incomplete") => void;
 }
+
 const SearchFilter: React.FC<SearchFilterProps> = ({
   search,
   setSearch,
@@ -15,6 +17,7 @@ const SearchFilter: React.FC<SearchFilterProps> = ({
 }) => {
   const [localSearch, setLocalSearch] = useState<string>(search);
 
+  // ✅ Typed debounce function to avoid any errors
   const debounce = <T extends (...args: any[]) => void>(
     func: T,
     delay: number
@@ -42,13 +45,15 @@ const SearchFilter: React.FC<SearchFilterProps> = ({
           type="text"
           value={localSearch}
           onChange={(e: ChangeEvent<HTMLInputElement>) => {
-            setLocalSearch(e.target.value);
-            handleSearchChange(e.target.value);
+            const value = e.target.value;
+            setLocalSearch(value);
+            handleSearchChange(value);
           }}
           placeholder="Search todos..."
           aria-label="Search todos by title"
         />
       </div>
+
       <div className="form-group">
         <label htmlFor="status">Status:</label>
         <select

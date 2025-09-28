@@ -1,9 +1,9 @@
 "use client";
-import React from "react";
+
 import { useParams, useRouter } from "next/navigation";
 import { useTodo } from "../hooks/useTodos";
 import LoadingSpinner from "./LoadingSpinner";
-import "../styles/TodoDetail.css";
+import styles from "../styles/TodoDetail.module.css"; // switched to module
 import { FaArrowLeft } from "react-icons/fa";
 
 interface Todo {
@@ -17,7 +17,7 @@ const TodoDetail: React.FC = () => {
   const params = useParams();
   const router = useRouter();
 
-  const id = params?.id as string;
+  const id = Number(params?.id); // ensure number type
 
   const { data: todo, isLoading, error } = useTodo(id);
 
@@ -26,15 +26,15 @@ const TodoDetail: React.FC = () => {
   if (!todo) return <div role="alert">Todo not found</div>;
 
   return (
-    <section className="todo-detail" aria-label="Todo Details">
+    <section className={styles.todoDetail} aria-label="Todo Details">
       <button
-        className="back-btn"
+        className={styles.backBtn}
         onClick={() => router.back()}
         aria-label="Back to todo list"
       >
         <FaArrowLeft /> Back
       </button>
-      <h2>{todo.title}</h2>
+      <h2 aria-label="Todo title">{todo.title}</h2>
       <p>Status: {todo.completed ? "Completed" : "Pending"}</p>
       <p>User ID: {todo.userId}</p>
       <p>ID: {todo.id}</p>

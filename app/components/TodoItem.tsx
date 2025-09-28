@@ -1,7 +1,7 @@
 "use client";
-import React, { useState } from "react";
+import  { useState } from "react";
 import Link from "next/link";
-import { useUpdateTodo } from "../hooks/useTodos";
+import { useUpdateTodo, useDeleteTodo } from "../hooks/useTodos";
 import { FaTrash, FaEdit } from "react-icons/fa";
 import { Todo, TodoFormValues } from "../lib/types";
 import TodoForm from "./TodoForm";
@@ -11,9 +11,10 @@ interface TodoItemProps {
   onDelete: (id: number) => void;
 }
 
-const TodoItem: React.FC<TodoItemProps> = ({ todo }) => {
+const TodoItem: React.FC<TodoItemProps> = ({ todo, onDelete }) => {
   const [isEditing, setIsEditing] = useState<boolean>(false);
   const { mutate: updateTodo } = useUpdateTodo();
+  const { mutate: deleteTodo } = useDeleteTodo();
 
   const handleUpdate = (values: TodoFormValues) => {
     updateTodo({
@@ -23,13 +24,21 @@ const TodoItem: React.FC<TodoItemProps> = ({ todo }) => {
     });
     setIsEditing(false);
   };
+
   const handleToggle = () => {
     updateTodo({
       ...todo,
       completed: !todo.completed,
     });
   };
-  const handleDelete = () => {};
+
+  const handleDelete = (id: number) => {
+    deleteTodo(todo.id, {
+      onSuccess: () => {
+        onDelete(todo.id); // ✅ now onDelete is actually used
+      },
+    });
+  };
 
   return (
     <li className="todo-item" role="listitem">
@@ -44,11 +53,18 @@ const TodoItem: React.FC<TodoItemProps> = ({ todo }) => {
           <Link href={`/todos/${todo.id}`} className="todo-item__title">
             {todo.title}
           </Link>
+
           <span
             className={`todo-item__status ${todo.completed ? "completed" : ""}`}
+            onClick={handleToggle}
+            role="button"
+            aria-label={`Mark ${todo.title} as ${
+              todo.completed ? "pending" : "completed"
+            }`}
           >
             {todo.completed ? "Completed" : "Pending"}
           </span>
+
           <div className="todo-item__actions">
             <button
               onClick={() => setIsEditing(true)}
@@ -57,7 +73,7 @@ const TodoItem: React.FC<TodoItemProps> = ({ todo }) => {
               <FaEdit />
             </button>
             <button
-              onClick={() => handleDelete}
+              onClick={() => handleDelete(todo.id)}
               aria-label={`Delete ${todo.title}`}
             >
               <FaTrash />
