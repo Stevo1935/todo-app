@@ -3,7 +3,7 @@
 import { useParams, useRouter } from "next/navigation";
 import { useTodo } from "../hooks/useTodos";
 import LoadingSpinner from "./LoadingSpinner";
-import styles from "../styles/TodoDetail.module.css"; // switched to module
+import styles from "../styles/TodoDetail.module.css"; 
 import { FaArrowLeft } from "react-icons/fa";
 
 interface Todo {
