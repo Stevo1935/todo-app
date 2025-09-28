@@ -8,7 +8,7 @@ import SearchFilter from "./SearchFilter";
 import TodoForm from "./TodoForm";
 import LoadingSpinner from "./LoadingSpinner";
 import { FaPlus } from "react-icons/fa";
-import "../styles/TodoList.modulecss";
+import "../styles/TodoList.module.css";
 import { Todo } from "../lib/types";
 
 interface TodoFormValues {
