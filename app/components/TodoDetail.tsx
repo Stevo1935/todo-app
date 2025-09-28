@@ -3,7 +3,7 @@
 import { useParams, useRouter } from "next/navigation";
 import { useTodo } from "../hooks/useTodos";
 import LoadingSpinner from "./LoadingSpinner";
-import styles from "../styles/TodoDetail.module.css"; 
+import styles from "../styles/TodoDetail.module.css";
 import { FaArrowLeft } from "react-icons/fa";
 
 interface Todo {
@@ -26,9 +26,9 @@ const TodoDetail: React.FC = () => {
   if (!todo) return <div role="alert">Todo not found</div>;
 
   return (
-    <section className={styles.todoDetail} aria-label="Todo Details">
+    <section className={styles["todo-detail"]} aria-label="Todo Details">
       <button
-        className={styles.backBtn}
+        className={styles["back-btn"]}
         onClick={() => router.back()}
         aria-label="Back to todo list"
       >

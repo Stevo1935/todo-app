@@ -1,7 +1,7 @@
 "use client";
 import React from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
-import "../styles/Form.css";
+import  "../styles/Form.css";
 import { FaTimes } from "react-icons/fa";
 import { Todo, TodoFormValues } from "../lib/types";
 

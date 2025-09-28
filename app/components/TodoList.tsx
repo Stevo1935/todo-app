@@ -8,7 +8,7 @@ import SearchFilter from "./SearchFilter";
 import TodoForm from "./TodoForm";
 import LoadingSpinner from "./LoadingSpinner";
 import { FaPlus } from "react-icons/fa";
-import "../styles/TodoList.module.css";
+
 import { Todo } from "../lib/types";
 
 interface TodoFormValues {
@@ -45,7 +45,7 @@ const TodoList: React.FC = () => {
   if (error) return <div role="alert">Error loading todos</div>;
 
   return (
-    <section className="{styles[todo-list]}" aria-label="Todo List">
+    <section className="todo-list" aria-label="Todo List">
       <SearchFilter
         search={search}
         setSearch={setSearch}
@@ -62,7 +62,7 @@ const TodoList: React.FC = () => {
       {showForm && (
         <TodoForm onSubmit={handleCreate} onCancel={() => setShowForm(false)} />
       )}
-      <ul className="{styles[todo-list__items]}" role="list">
+      <ul className="todo-list__items" role="list">
         {todos?.map((todo) => (
           <TodoItem key={todo.id} todo={todo} onDelete={handleDelete} />
         ))}
